@@ -40,6 +40,23 @@ export default function Home() {
     }
   }
 
+  async function disconnectGoogle() {
+    try {
+      const response = await fetch("/api/google/revoke", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (data.success) {
+        window.location.reload();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   // this use effect is to check if the user has already connected to google
   useEffect(() => {
     setPageLoading(true);
@@ -75,6 +92,14 @@ export default function Home() {
         </div>
       ) : (
         <div className="flex flex-col space-y-2">
+          <button
+            className="fixed top-0 right-0 m-4 p-1 bg-red-400 text-white rounded-md"
+            onClick={() => {
+              disconnectGoogle();
+            }}
+          >
+            Disconnect
+          </button>
           <p> Type your text below to create an event </p>
           <textarea
             className="border-2 border-gray-300 rounded-md p-2 text-black focus:outline-none focus:border-blue-700"
