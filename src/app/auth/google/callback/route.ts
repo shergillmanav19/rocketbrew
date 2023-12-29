@@ -7,9 +7,11 @@ export async function GET(request: Request) {
   console.log("request.url", request.url);
   const code = request.url.split("code=")[1];
   const codeValue = code?.split("&")[0];
-
+  console.log("codeValue", codeValue);
   if (codeValue) {
-    const { tokens } = await googleOAuth2Client.getToken(codeValue);
+    const { tokens, res } = await googleOAuth2Client.getToken(codeValue);
+    console.log("res", res);
+    console.log("tokens", tokens);
     if (!tokens) {
       throw new Error("No tokens returned from Google");
     }
