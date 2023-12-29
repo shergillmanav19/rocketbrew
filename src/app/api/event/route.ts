@@ -18,7 +18,15 @@ export async function POST(request: Request) {
 
   const google_access_token = tokenData.split("tokenData=")[1];
 
-  const res = chrono.parse(body.query, new Date(), { forwardDate: true });
+  const res = chrono.parse(
+    body.query,
+    {
+      instant: new Date(),
+      timezone: "PST",
+    },
+    { forwardDate: true }
+  );
+
   console.log("res", res);
   // start time is needed to schedule an event
   // if not start time then we can return an error
@@ -37,6 +45,9 @@ export async function POST(request: Request) {
   const startTime = res[0].start.date();
 
   let endTime = res[0].end?.date();
+
+  console.log("startTime", startTime);
+  console.log("endTime", endTime);
   // end time is not stated, but there is a start time, so we can assume 1 hour
   if (!endTime) {
     endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
