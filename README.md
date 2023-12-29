@@ -2,35 +2,40 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+- The project is deployed at https://rocketbrew.vercel.app
+- I have linked a demo as well
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Things I tried
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Experimented with OpenAI calls to extract event start, end, and the event object to be sent to Google API. Though functional, it required significant fine-tuning to meet the required standards.
+- Initially attempted to use Supabase auth and DB to store user's Google auth sessions. Later decided to store auth in cookies to prioritize speed and addressing core problems.
+- Explored various Python packages without much success.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Things I left out due to time constraint
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Absence of timezone checks.
+- No inclusion of recurring events.
+- No reminders.
+- Scraped FastAPI Python backend, resorting to NextJS server functions to increase speed.
 
-## Learn More
+# Project Details
 
-To learn more about Next.js, take a look at the following resources:
+- Connection to Google Calendar API.
+- Storing an access token in cookies.
+- A text area for users to input queries.
+- Depending on the returned result, you will be redirected to one of three pages: success, fail, or retry.
+- Viewing of the Google Calendar invite upon success.
+- Chrono Parser: An NLP for date parsing made in JS. Chose this due to promising reviews and use cases related to this problem.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Overall Reflection
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+An intriguing problem which was enjoyable to work on, despite the room for future enhancements. Witnessing a real use-case made the project exciting!
 
-## Deploy on Vercel
+# Future Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Given more time, certain changes could enhance the project:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- A combination of OpenAI and Chrono to parse the desired output object.
+- Dedicate time to discover other NLP date parsers and explore established solutions.
+- Improve frontend UI/UX
+- Use database to store user's past queries and such.
