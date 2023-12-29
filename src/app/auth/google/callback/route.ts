@@ -6,8 +6,10 @@ import { permanentRedirect } from "next/navigation";
 export async function GET(request: Request) {
   console.log("request.url", request.url);
   const code = request.url.split("?code=")[1];
-  if (code) {
-    const { tokens } = await googleOAuth2Client.getToken(code);
+  const codeValue = code?.split("&")[0];
+  
+  if (codeValue) {
+    const { tokens } = await googleOAuth2Client.getToken(codeValue);
     if (!tokens) {
       throw new Error("No tokens returned from Google");
     }
