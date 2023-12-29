@@ -26,9 +26,9 @@ export default function Home() {
       // this is a redirect url to a result page dependent on the query result
       const { redirect, event: googleEvent } = event;
       if (redirect === "success") {
-        router.push(redirect + "?htmlLink=" + googleEvent.htmlLink);
+        router.replace(redirect + "?htmlLink=" + googleEvent.htmlLink);
       } else {
-        router.push(redirect);
+        router.replace(redirect);
       }
     } catch (e) {
       if (e instanceof Error) {
