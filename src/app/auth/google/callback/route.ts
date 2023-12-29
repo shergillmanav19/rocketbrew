@@ -5,8 +5,9 @@ import { permanentRedirect } from "next/navigation";
 
 export async function GET(request: Request) {
   console.log("request.url", request.url);
-  const code = request.url.split("code=")[1];
-  const codeValue = code?.split("&")[0];
+  const url = new URL(request.url);
+  console.log("url", url);
+  const codeValue = url.searchParams.get("code");
   console.log("codeValue", codeValue);
   if (codeValue) {
     const { tokens, res } = await googleOAuth2Client.getToken(codeValue);
