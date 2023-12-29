@@ -14,40 +14,44 @@ export default function Home() {
 
   async function handleCreateEvent() {
     setResponseLoading(true);
-    const response = await fetch("/api/event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: queryInput }),
-    });
-    const event = await response.json();
-    // this is a redirect url to a result page dependent on the query result
-    const { redirect, event: googleEvent } = event;
-    if (redirect === "success") {
-      router.push(redirect + "?htmlLink=" + googleEvent.htmlLink);
-    } else {
-      router.push(redirect);
+    try {
+      const response = await fetch("/api/event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: queryInput }),
+      });
+      const event = await response.json();
+      // this is a redirect url to a result page dependent on the query result
+      const { redirect, event: googleEvent } = event;
+      if (redirect === "success") {
+        router.push(redirect + "?htmlLink=" + googleEvent.htmlLink);
+      } else {
+        router.push(redirect);
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        alert(e.message);
+      }
+    } finally {
+      setQueryInput("");
+      setResponseLoading(false);
     }
   }
 
+  // this use effect is to check if the user has already connected to google
   useEffect(() => {
     setPageLoading(true);
     setGoogleIntegrationExists(false);
 
     const cookies = document.cookie.split("; ");
     const cookie = cookies.find((row) => row.startsWith("tokenData="));
-
     if (cookie) {
       setGoogleIntegrationExists(true);
     }
-
     setPageLoading(false);
   }, []);
-
-  useEffect(() => {
-    console.log("queryInput", queryInput);
-  }, [queryInput]);
 
   if (pageLoading || responseLoading) {
     return (

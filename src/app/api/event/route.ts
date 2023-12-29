@@ -6,14 +6,14 @@ export async function POST(request: Request) {
   // i store the token data in request cookies
   const cookies = request.headers.get("cookie");
   if (!cookies) {
-    throw new Error("No cookies");
+    throw new Error("We're missing cookies!");
   }
   // console.log("cookies", cookies);
   const tokenData = cookies
     .split("; ")
     .find((cookie) => cookie.startsWith("tokenData="));
   if (!tokenData) {
-    throw new Error("No tokenData");
+    throw new Error("Google access token not found.");
   }
 
   const google_access_token = tokenData.split("tokenData=")[1];
