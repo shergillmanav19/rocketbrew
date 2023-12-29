@@ -25,16 +25,16 @@ export default function Home() {
       const event = await response.json();
       // this is a redirect url to a result page dependent on the query result
       const { redirect, event: googleEvent } = event;
+
       if (redirect === "success") {
-        router.replace(redirect + "?htmlLink=" + googleEvent.htmlLink);
+        router.push(redirect + "?htmlLink=" + googleEvent.htmlLink);
       } else {
-        router.replace(redirect);
+        router.push(redirect);
       }
     } catch (e) {
       if (e instanceof Error) {
         alert(e.message);
       }
-    } finally {
       setQueryInput("");
       setResponseLoading(false);
     }
