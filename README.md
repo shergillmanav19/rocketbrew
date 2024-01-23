@@ -1,9 +1,18 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Project Introduction 
+
+Welcome to our Google Calendar Event Creator project. This software is an innovative tool designed to help users easily schedule events by just typing text input. It circumvents the need to manually input event details by interfacing directly with Google Calendar and creating events based on user-specified parameters.
+
+## How it works
+
+The core functionality of this application is to intelligently parse user text inputs that specify a time and date for a planned event. For example, if a user inputs, "Let's meet at 4 in 5 days", the software is capable of understanding this, and will automatically schedule an event in your Google Calendar for 4 PM, 5 days from the current date.
+
+The software leverages natural language processing to make sense of the user's desired event date and time. This parsing works with a variety of formats and phrases, providing a flexible and user-friendly experience.
+
 ## Getting Started
 
 - The project is deployed at https://rocketbrew.vercel.app
-- I have linked a demo as well
 
 # Things I tried
 
